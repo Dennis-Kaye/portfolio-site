@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      /* Palette from new photo: warm wood + light, airy neutrals */
+      /* Palette from photo: warm wood + light, airy neutrals */
       --bg: #f6f2ec;          /* page background */
       --bg-alt: #ffffff;      /* cards / hero inner */
       --accent: #d8893b;      /* warm amber (table) */
@@ -88,18 +88,46 @@
     }
 
     .hero-inner {
-      max-width: 720px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-copy {
+      /* reserved for future tweaks */
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 16px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+      object-fit: cover;
+    }
+
     .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.95rem;        /* bigger */
-  font-weight: 700;          /* bolder */
-  color: #b85b14;            /* slightly deeper, stronger orange */
-  margin-bottom: 0.9rem;
-}
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #b85b14;
+      background: rgba(255,255,255,0.7);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 0.9rem;
+    }
 
     h1 {
       font-size: clamp(2rem, 3.1vw, 2.6rem);
@@ -305,6 +333,14 @@
       .two-col {
         grid-template-columns: minmax(0, 1fr);
       }
+
+      .hero-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-image {
+        margin-top: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -323,20 +359,28 @@
     <main>
       <section class="hero">
         <div class="hero-inner">
-          <div class="eyebrow">Tech &amp; AI for normal humans</div>
-          <h1>
-            Long-form, story-driven content that helps real people understand
-            your tools.
-          </h1>
-          <p>
-            I write articles, guides, and case studies about AI and software
-            for therapists, coaches, and small service businesses. No jargon,
-            no sales-bro hype—just clear stories and explanations your
-            audience can actually use.
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Talk about a project</a>
-            <a href="#samples" class="btn btn-ghost">See writing samples</a>
+          <div class="hero-layout">
+            <div class="hero-copy">
+              <div class="eyebrow">Tech &amp; AI for normal humans</div>
+              <h1>
+                Long-form, story-driven content that helps real people understand
+                your tools.
+              </h1>
+              <p>
+                I write articles, guides, and case studies about AI and software
+                for therapists, coaches, and small service businesses. No jargon,
+                no sales-bro hype—just clear stories and explanations your
+                audience can actually use.
+              </p>
+              <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Talk about a project</a>
+                <a href="#samples" class="btn btn-ghost">See writing samples</a>
+              </div>
+            </div>
+
+            <div class="hero-image">
+              <img src="laptop-notebook.jpg" alt="Laptop and notebook on a wooden table with sunlight" />
+            </div>
           </div>
         </div>
       </section>
@@ -394,69 +438,84 @@
           writing for AI, tools, and solo businesses. Real client work will
           look and feel similar.
         </p>
-  <article class="card">
-  <h3>
-    <a href="ai-without-the-hype.pdf" target="_blank" rel="noopener">
-      AI Without the Hype: A Therapist’s Guide to Getting Admin Time Back
-    </a>
-  </h3>
-  <p>
-    Long-form sample article for solo therapists exploring
-    low-risk, practical uses of AI for admin work—without touching
-    clinical judgment. Written in clear, 8th-grade-level
-    language with a narrative hook.
-  </p>
-  <div class="meta">
-    Format: 2,000-word explainer · Audience: solo therapists and
-    small practices ·
-    <a href="ai-without-the-hype.pdf" target="_blank" rel="noopener">
-      View / download PDF
-    </a>
-  </div>
-</article>      
+        <div class="card-grid">
+          <article class="card">
+            <h3>
+              <a href="ai-without-the-hype.pdf" target="_blank" rel="noopener">
+                AI Without the Hype: A Therapist’s Guide to Getting Admin Time Back
+              </a>
+            </h3>
+            <p>
+              Long-form sample article for solo therapists exploring
+              low-risk, practical uses of AI for admin work—without touching
+              clinical judgment. Written in clear, 8th-grade-level
+              language with a narrative hook.
+            </p>
+            <div class="meta">
+              Format: 2,000-word explainer · Audience: solo therapists and
+              small practices ·
+              <a href="ai-without-the-hype.pdf" target="_blank" rel="noopener">
+                View / download PDF
+              </a>
+            </div>
+          </article>
 
           <article class="card">
-  <h3>
-    <a href="fridays-back-case-study.pdf" target="_blank" rel="noopener">
-      How One Solo Counselor Used Simple AI Tools to Get Fridays Back
-    </a>
-  </h3>
-  <p>
-    Narrative case study following a composite private-practice
-    counselor who used basic AI-assisted workflows to reclaim time
-    and reduce burnout, told in a calm, grounded voice.
-  </p>
-  <div class="meta">
-    Format: 1,800-word case study · Audience: counselors &amp; mental
-    health professionals ·
-    <a href="fridays-back-case-study.pdf" target="_blank" rel="noopener">
-      View / download PDF
-    </a>
-  </div>
-</article>
+            <h3>
+              <a href="fridays-back-case-study.pdf" target="_blank" rel="noopener">
+                How One Solo Counselor Used Simple AI Tools to Get Fridays Back
+              </a>
+            </h3>
+            <p>
+              Narrative case study following a composite private-practice
+              counselor who used basic AI-assisted workflows to reclaim time
+              and reduce burnout, told in a calm, grounded voice.
+            </p>
+            <div class="meta">
+              Format: 1,800-word case study · Audience: counselors &amp; mental
+              health professionals ·
+              <a href="fridays-back-case-study.pdf" target="_blank" rel="noopener">
+                View / download PDF
+              </a>
+            </div>
+          </article>
 
           <article class="card">
-            <h3>The Quiet Marketing Playbook for Therapists Who Hate Social Media</h3>
+            <h3>
+              <a href="quiet-marketing-playbook.pdf" target="_blank" rel="noopener">
+                The Quiet Marketing Playbook for Therapists Who Hate Social Media
+              </a>
+            </h3>
             <p>
               Sample article outlining a low-drama marketing approach for
               clinicians: referrals, simple web presence, and one sustainable
               channel instead of constant posting.
             </p>
             <div class="meta">
-              Format: 1,600-word article · Audience: therapists &amp; coaches
+              Format: ~1,600-word article · Audience: therapists &amp; coaches ·
+              <a href="quiet-marketing-playbook.pdf" target="_blank" rel="noopener">
+                View / download PDF
+              </a>
             </div>
           </article>
 
           <article class="card">
-            <h3>ELI5: What Is an “AI Agent,” Really?</h3>
+            <h3>
+              <a href="what-is-an-ai-agent.pdf" target="_blank" rel="noopener">
+                What the Hell Is an “AI Agent,” Really?
+              </a>
+            </h3>
             <p>
               Plain-English explainer that strips the buzzwords off AI agents
               and shows solo business owners what they can actually do with
-              AI LLMs in everyday workflows.
+              them in everyday workflows.
             </p>
             <div class="meta">
-              Format: 2,000-word explainer · Audience: solo business owners,
-              non-technical users
+              Format: ~2,000-word explainer · Audience: solo business owners,
+              non-technical users ·
+              <a href="what-is-an-ai-agent.pdf" target="_blank" rel="noopener">
+                View / download PDF
+              </a>
             </div>
           </article>
         </div>
@@ -516,13 +575,13 @@
           I’m a freelance writer who lives in the overlap between technology
           and real people’s work. I’ve spent years translating engineer-speak
           and complex systems into something an 8th grader can understand and
-          actually use.  
+          actually use.
           <br /><br />
           I’ve also seen up close how therapists, coaches, and other solo
           professionals are drowning in tools that promise to “transform
           their business” while making everything more confusing. My work is a
           quiet alternative: long-form, story-driven content that helps your
-          audience feel oriented, not sold to.  
+          audience feel oriented, not sold to.
           <br /><br />
           If you’re building something genuinely useful for non-technical
           humans, I’m the person you call when you need to explain it without
@@ -540,11 +599,12 @@
           </p>
           <p>
             Email:
-            <span class="contact-highlight">dennis.kaye733@gmail.com</span>
+            <span class="contact-highlight">you@example.com</span>
+            <!-- replace with your actual address -->
           </p>
           <p>
-            Prefer async? That’s my default. We can handle everything by
-            email or DM unless a call will make things easier.
+            I usually work async over email or messages. If a quick call would
+            genuinely make things easier, we can do that too.
           </p>
         </div>
       </section>
