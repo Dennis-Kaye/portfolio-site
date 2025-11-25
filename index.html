@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dennis – Tech & AI Writer for Normal Humans</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      /* Palette from new photo: warm wood + light, airy neutrals */
+      --bg: #f6f2ec;          /* page background */
+      --bg-alt: #ffffff;      /* cards / hero inner */
+      --accent: #d8893b;      /* warm amber (table) */
+      --accent-soft: #f2c79a; /* pale amber */
+      --text: #252525;        /* main text */
+      --muted: #6b6b6b;       /* secondary text */
+      --border: #e1d4c4;      /* soft border */
+      --chip-bg: #faf5ee;     /* pills / chips */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    header {
+      padding: 1rem 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 2.5rem 0 3rem;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at top left, rgba(242,199,154,0.55), transparent),
+        radial-gradient(circle at bottom right, rgba(216,137,59,0.4), transparent),
+        linear-gradient(135deg, #fffaf4, #f4eadf);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.95rem;        /* bigger */
+  font-weight: 700;          /* bolder */
+  color: #b85b14;            /* slightly deeper, stronger orange */
+  margin-bottom: 0.9rem;
+}
+
+    h1 {
+      font-size: clamp(2rem, 3.1vw, 2.6rem);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      font-size: 0.98rem;
+      max-width: 40rem;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s ease, color 0.18s ease,
+        border-color 0.18s ease, transform 0.08s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: #e09745;
+      border-color: #e09745;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: rgba(37,37,37,0.18);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(37,37,37,0.35);
+      transform: translateY(-1px);
+    }
+
+    section {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-intro {
+      font-size: 0.96rem;
+      max-width: 40rem;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 2.2rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.6rem;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .meta {
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: #9a8468;
+    }
+
+    .services-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .services-list li {
+      list-style: none;
+      padding-left: 0.75rem;
+      border-left: 2px solid rgba(216,137,59,0.6);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      max-width: 42rem;
+      color: var(--muted);
+    }
+
+    .contact-block {
+      font-size: 0.95rem;
+      max-width: 30rem;
+      color: var(--muted);
+    }
+
+    .contact-block p + p {
+      margin-top: 0.5rem;
+    }
+
+    .contact-highlight {
+      display: inline-block;
+      margin-top: 0.4rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+      background: var(--chip-bg);
+      border: 1px solid var(--border);
+      font-family: "Courier New", monospace;
+      font-size: 0.86rem;
+      color: var(--text);
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        padding: 1.8rem 1.4rem 2.2rem;
+      }
+
+      section {
+        margin-top: 2.4rem;
+        padding-top: 2rem;
+      }
+
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">Dennis Kornoely · Writer</div>
+      <nav>
+        <a href="#samples">Samples</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="eyebrow">Tech &amp; AI for normal humans</div>
+          <h1>
+            Long-form, story-driven content that helps real people understand
+            your tools.
+          </h1>
+          <p>
+            I write articles, guides, and case studies about AI and software
+            for therapists, coaches, and small service businesses. No jargon,
+            no sales-bro hype—just clear stories and explanations your
+            audience can actually use.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Talk about a project</a>
+            <a href="#samples" class="btn btn-ghost">See writing samples</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="what-i-do">
+        <h2>What I do &amp; who I write for</h2>
+        <p class="section-intro">
+          My lane is simple: I sit between complex tools and the people who
+          are supposed to use them. I translate AI and software into
+          plain-English stories for solo professionals and small teams.
+        </p>
+        <div class="two-col">
+          <div>
+            <h3>What I write</h3>
+            <ul class="services-list">
+              <li>
+                Long-form articles &amp; guides (1,500–3,000+ words) that
+                explain AI and software to non-technical readers.
+              </li>
+              <li>
+                Story-driven case studies and customer stories that show how
+                real people use your product in the wild.
+              </li>
+              <li>
+                Quiet marketing content for therapists &amp; coaches who want
+                a calm, steady practice without playing the influencer game.
+              </li>
+              <li>
+                Resource pages, “how it works” content, and help docs that
+                read like a human wrote them.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Who I write for</h3>
+            <p>
+              I’m a good fit if your audience is smart but busy and allergic
+              to hype:
+            </p>
+            <div class="pill-list">
+              <span class="pill">Therapists</span>
+              <span class="pill">Coaches</span>
+              <span class="pill">Solo service businesses</span>
+              <span class="pill">Small SaaS &amp; AI tools</span>
+              <span class="pill">Non-technical teams</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="samples">
+        <h2>Sample work</h2>
+        <p class="section-intro">
+          A few sample pieces that show how I approach long-form, feature-style
+          writing for AI, tools, and solo businesses. Real client work will
+          look and feel similar.
+        </p>
+        <div class="card-grid">
+          <article class="card">
+            <h3>AI Without the Hype: A Therapist’s Guide to Getting Admin Time Back</h3>
+            <p>
+              Long-form sample article for solo therapists exploring
+              low-risk, practical uses of AI for admin work—without touching
+              clinical judgment. Written in clear, 8th-grade-level
+              language with a narrative hook.
+            </p>
+            <div class="meta">
+              Format: 2,000-word explainer · Audience: solo therapists and
+              small practices
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>How One Solo Counselor Used Simple AI Tools to Get Fridays Back</h3>
+            <p>
+              Narrative case study following a composite private-practice
+              counselor who used basic AI-assisted workflows to reclaim time
+              and reduce burnout, told in a calm, grounded voice.
+            </p>
+            <div class="meta">
+              Format: 1,800-word case study · Audience: counselors &amp; mental
+              health professionals
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>The Quiet Marketing Playbook for Therapists Who Hate Social Media</h3>
+            <p>
+              Sample article outlining a low-drama marketing approach for
+              clinicians: referrals, simple web presence, and one sustainable
+              channel instead of constant posting.
+            </p>
+            <div class="meta">
+              Format: 1,600-word article · Audience: therapists &amp; coaches
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>ELI5: What Is an “AI Agent,” Really?</h3>
+            <p>
+              Plain-English explainer that strips the buzzwords off AI agents
+              and shows solo business owners what they can actually do with
+              AI LLMs in everyday workflows.
+            </p>
+            <div class="meta">
+              Format: 2,000-word explainer · Audience: solo business owners,
+              non-technical users
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="services">
+        <h2>How I work</h2>
+        <p class="section-intro">
+          I keep the process simple so you can stay focused on building the
+          product or running the practice.
+        </p>
+        <div class="two-col">
+          <div>
+            <h3>Typical engagement</h3>
+            <ul class="services-list">
+              <li>
+                You tell me who the piece is for, what it should accomplish,
+                and where it will live.
+              </li>
+              <li>
+                I put together a brief outline so we agree on structure and
+                depth before I draft.
+              </li>
+              <li>
+                I research, draft, and deliver a clean first version in Google
+                Docs or Word with comments where decisions matter.
+              </li>
+              <li>
+                We do one focused revision pass to tighten, clarify, and align
+                with your brand voice.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>What you get</h3>
+            <ul class="services-list">
+              <li>
+                A long-form article, guide, or case study written in plain
+                English, ready for your content team or designer.
+              </li>
+              <li>
+                Headlines, subheads, and pull-quotes that make the piece easy
+                to skim without turning it into clickbait.
+              </li>
+              <li>
+                Light SEO baked in (structure, headings, readable copy) without
+                sacrificing readability for humans.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2>About Dennis</h2>
+        <p class="about-text">
+          I’m a freelance writer who lives in the overlap between technology
+          and real people’s work. I’ve spent years translating engineer-speak
+          and complex systems into something an 8th grader can understand and
+          actually use.  
+          <br /><br />
+          I’ve also seen up close how therapists, coaches, and other solo
+          professionals are drowning in tools that promise to “transform
+          their business” while making everything more confusing. My work is a
+          quiet alternative: long-form, story-driven content that helps your
+          audience feel oriented, not sold to.  
+          <br /><br />
+          If you’re building something genuinely useful for non-technical
+          humans, I’m the person you call when you need to explain it without
+          the jargon.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="contact-block">
+          <p>
+            Ready to talk about an article, guide, or case study? Send a short
+            note with what you do, what you need written, and your rough
+            timeline.
+          </p>
+          <p>
+            Email:
+            <span class="contact-highlight">dennis.kaye733@gmail.com</span>
+          </p>
+          <p>
+            Prefer async? That’s my default. We can handle everything by
+            email or DM unless a call will make things easier.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; <span id="year"></span> Dennis Kornoely. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
